@@ -8,6 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.emersonmelo.todosimple.models.User;
 import com.emersonmelo.todosimple.repositories.UserRepository;
+import com.emersonmelo.todosimple.services.exceptions.ObjectNotFoundException;
 
 
 @Service
@@ -18,7 +19,7 @@ public class UserService {
 
     public User findById(Long id) {
         Optional<User> user = this.userRepository.findById(id);
-        return user.orElseThrow(() -> new RuntimeException("Usuário não encontrado Id: " + id + ", Tipo: " + User.class.getName()));
+        return user.orElseThrow(() -> new ObjectNotFoundException("Usuário não encontrado Id: " + id + ", Tipo: " + User.class.getName()));
     }
 
     @Transactional
